@@ -10,7 +10,7 @@ import Spinner from './Spinner'
 
 const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,technology'
 
-const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none'
+const activeBtnStyles = 'bg-teal-700 text-white font-bold p-2 rounded-full w-20 outline-none'
 const notActiveBtnStyles = 'bg-primary-500 mr-4 text-black font-bold p-2 rounded-full w-20 outline-none'
 
 const UserProfile = () => {
@@ -57,6 +57,16 @@ const UserProfile = () => {
   }
   
   if(!user) return <Spinner message='Loading Profile...'/>
+
+  const noPins = pins?.length ? (
+        <div className="px-2">
+        <MasonryLayout pins={pins} />
+      </div>
+      ): (
+        <div className='flex justify-center items-center font-bold w-full text-xl mt-2'>
+          No Pins Found
+        </div>
+      )
 
   return (
     <div className='relative pb-2 h-full justify-center items-center'>
@@ -112,16 +122,7 @@ const UserProfile = () => {
             </button>
           </div>
 
-          {pins?.length ? (
-            <div className="px-2">
-            <MasonryLayout pins={pins} />
-          </div>
-          ): (
-            <div className='flex justify-center items-center font-bold w-full text-xl mt-2'>
-              No Pins Found
-            </div>
-          )
-        }
+          { noPins }
 
           
         </div>

@@ -14,7 +14,20 @@ const Sidebar = ({ user, closeToggle}) => {
   const handleCloseSideBar = () => {
     if(closeToggle) closeToggle(false)
   }
-  console.log('categories: ', categories)
+
+  const showCategories = categories.slice(0, categories.length - 1).map((category)=> (
+    <NavLink
+    to={`/category/${category.name}`}
+    className={({ isActive }) => 
+      isActive ? isActiveStyle: isNotActiveStyle
+    }
+    onClick={handleCloseSideBar}
+    key={category.name}
+  >
+    <img src={category.image} alt="category-pic" className='w-8 h-8 rounded-full shadow-sm' />
+    {category.name}
+  </NavLink>
+  ))
 
   return (
     <div className='flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar'>
@@ -38,19 +51,7 @@ const Sidebar = ({ user, closeToggle}) => {
             Home
           </NavLink>
           <h3 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categories</h3>
-          {categories.slice(0, categories.length - 1).map((category)=> (
-            <NavLink
-            to={`/category/${category.name}`}
-            className={({ isActive }) => 
-              isActive ? isActiveStyle: isNotActiveStyle
-            }
-            onClick={handleCloseSideBar}
-            key={category.name}
-          >
-            <img src={category.image} alt="category-pic" className='w-8 h-8 rounded-full shadow-sm' />
-            {category.name}
-          </NavLink>
-          ))}
+          { showCategories }
         </div>
       </div>
       {user && (

@@ -35,9 +35,11 @@ const Feed = () => {
 
   if(!pins?.length) return <h2>No Pins Available</h2>
 
+  const pinsFeed = pins && <MasonryLayout pins={pins} />
+
   return (
     <div>
-      {pins && <MasonryLayout pins={pins} />}
+      { pinsFeed }
     </div>
   )
 }

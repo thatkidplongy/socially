@@ -61,6 +61,17 @@ const PinDetail = ({ user }) => {
 
   if (!pinDetail) return <Spinner message="Loading pin..." />;
 
+  const suggestions = pins?.length > 0 ? (
+              <>
+                <h2 className="text-center font-bold text-2x mt-8 mb-4">
+                  More Like This
+                  <MasonryLayout pins={pins} />
+                </h2>
+              </>
+            ): (
+              <Spinner message='Loading more pins...' />
+        )
+
   return (
     <>
     <div
@@ -134,7 +145,7 @@ const PinDetail = ({ user }) => {
       />
       <button
         type="button"
-        className="bg-red-500 text-white rounded-lg px-2 py-2 font-semibold text-base outline-none"
+        className="bg-teal-700 text-white rounded-lg px-2 py-2 font-semibold text-base outline-none"
         onClick={addComment}
       >
         {addingComment ? 'Posting the comment...' : 'Post Something'}
@@ -142,17 +153,7 @@ const PinDetail = ({ user }) => {
       </div>
       </div>
     </div>
-    {pins?.length > 0 ? (
-      <>
-        <h2 className="text-center font-bold text-2x mt-8 mb-4">
-          More Like This
-          <MasonryLayout pins={pins} />
-        </h2>
-      </>
-    ): (
-      <Spinner message='Loading more pins...' />
-    )
-  }
+    { suggestions }
   </>
   );
 };

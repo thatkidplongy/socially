@@ -28,15 +28,21 @@ const Search = ({ searchTerm }) => {
         })
     }
   }, [searchTerm])
-  
+
+  const isLoading = loading && <Spinner message='Searching for pins..' />
+
+  const pinsFeed = pins?.length !== 0 && <MasonryLayout pins={pins} />
+
+  const noPins = pins?.length === 0 && searchTerm !== '' && !loading && (
+      <div className='mt-10 text-center text-xl'>No pins found</div>
+    ) 
+    
 
   return (
     <div>
-      {loading && <Spinner message='Searching for pins..' />}
-      {pins?.length !== 0 && <MasonryLayout pins={pins} />}
-      {pins?.length === 0 && searchTerm !== '' && !loading && (
-        <div className='mt-10 text-center text-xl'>No pins found</div>
-      ) }
+      { isLoading }
+      { pinsFeed }
+      { noPins }
     </div>
   )
 }
