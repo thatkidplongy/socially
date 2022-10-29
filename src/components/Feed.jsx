@@ -31,7 +31,7 @@ const Feed = () => {
   }, [categoryId])
   
 
-  if(loading) return <Spinner message='We are adding new ideas to your feed'/>
+  if(loading) return <div className='mt-60'><Spinner message='We are adding new ideas to your feed'/></div>
 
   if(!pins?.length) return <h2>No Pins Available</h2>
 
